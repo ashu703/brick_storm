@@ -19,17 +19,36 @@
 </head>
 <body style="background-color: black">
  <div class="well lead container">
-<canvas id="myCanvas" style="border: 2px solid red; width: 100%"></canvas>
+<canvas id="myCanvas" style="border: 2px solid red;width:100%; "></canvas>
  </div>
 <script>
-  var canvasWidth=  document.getElementById("myCanvas").clientWidth;
   var c=document.getElementById("myCanvas");
+
+  var canvasWidth= c.width;
+  var canvasHeight= c.height;
+  var rectHeight=canvasHeight/20;
+
+  var recthPosition=canvasHeight-rectHeight;
+  var rectwidth=canvasWidth/5;
+  var rectwPosition=canvasWidth/2-(rectwidth/2);
   var ctx= c.getContext("2d");
-  ctx.rect(20,20,70,100);
-  ctx.fillStyle="green";
+
+  ctx.beginPath();
+  ctx.fillStyle="blue";
+  ctx.fillRect(rectwPosition,recthPosition,rectwidth,rectHeight);
+
+
+  var centerX = canvasWidth / 2;
+
+  var radius = 5;
+  var centerY = recthPosition-(radius/2)-1.5 ;
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = 'green';
   ctx.fill();
 
-alert(x);
+
+
 </script>
    <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
