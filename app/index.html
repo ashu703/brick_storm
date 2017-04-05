@@ -13,41 +13,97 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body style="background-color: black">
  <div class="well lead container">
-<canvas id="myCanvas" style="border: 2px solid red;width:100%; "></canvas>
+<canvas id="myCanvas" style="border: 2px solid red; "></canvas>
  </div>
 <script>
+    myFunction();
+    var bx=5;
+    var by=7;
   var c=document.getElementById("myCanvas");
-
   var canvasWidth= c.width;
   var canvasHeight= c.height;
   var rectHeight=canvasHeight/20;
-
   var recthPosition=canvasHeight-rectHeight;
   var rectwidth=canvasWidth/5;
   var rectwPosition=canvasWidth/2-(rectwidth/2);
-  var ctx= c.getContext("2d");
+  var rrectwPosition=rectwPosition;
 
-  ctx.beginPath();
-  ctx.fillStyle="blue";
-  ctx.fillRect(rectwPosition,recthPosition,rectwidth,rectHeight);
+    var ctx= c.getContext("2d");
+function rect() {
+    ctx.beginPath();
+    ctx.fillStyle = "blue";
+    ctx.fillRect(rectwPosition, recthPosition, rectwidth, rectHeight);
+} var radius = 5;
+    var centerX = canvasWidth / 2;
+    var centerY = 50 ;
+    var realcy=centerY;
+    var myVar;
+
+  function myFunction() {
+    myVar = setInterval(alertFunc, 100);
+  }
+
+  function alertFunc() {
+
+      ctx.clearRect(0, 0, c.width, c.height);
+      rect();
+      centerY+=by;
+      centerX+=bx;
+    if((centerX>=canvasWidth)||(centerX<=0)){
+        bx=-bx;
+    }
 
 
-  var centerX = canvasWidth / 2;
+      if(centerY>recthPosition){
+          if((rectwPosition<=centerX)&&(centerX<=(rectwPosition+rectwidth))){
+              by=-by;
+          }else{
+              clearInterval(myVar);
 
-  var radius = 5;
-  var centerY = recthPosition-(radius/2)-1.5 ;
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-  ctx.fillStyle = 'green';
-  ctx.fill();
+          }
 
 
+
+      }
+      if(centerY<=0){
+          by=-by;
+      }
+
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = 'green';
+    ctx.fill();}
+    document.onkeydown = checkKey;
+
+    function checkKey(e) {
+
+        e = e || window.event;
+
+        if (e.keyCode == '37') {
+            if(rectwPosition<0){
+
+
+            }else{
+                rectwPosition-=12;
+            }
+            // left arrow
+        }
+        else if (e.keyCode == '39') {
+            if(rectwPosition>(canvasWidth-rectwidth)){
+
+
+            }else{
+
+                rectwPosition+=12;
+            }           // right arrow
+        }
+
+    }
 
 </script>
    <script src="bower_components/angular/angular.js"></script>
